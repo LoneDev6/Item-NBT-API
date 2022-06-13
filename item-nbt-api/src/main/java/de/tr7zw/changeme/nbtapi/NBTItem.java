@@ -19,6 +19,9 @@ public class NBTItem extends NBTCompound {
 	private boolean directApply;
 	private ItemStack originalSrcStack = null;
 
+	@Deprecated
+	private ItemStack originalItem;
+
 	/**
 	 * Constructor for NBTItems. The ItemStack will be cloned!
 	 * 
@@ -43,6 +46,7 @@ public class NBTItem extends NBTCompound {
 		}
 		this.directApply = directApply;
 		bukkitItem = item.clone();
+		this.originalItem = item;
 		if(directApply) {
 			this.originalSrcStack = item;
 		}
@@ -171,6 +175,12 @@ public class NBTItem extends NBTCompound {
 		if(directApply) {
 			applyNBT(originalSrcStack);
 		}
+	}
+
+	@Deprecated
+	public void saveMetaChanges() {
+		this.originalItem.setItemMeta(this.bukkitItem.getItemMeta());
+		this.bukkitItem = this.originalItem.clone();
 	}
 
 }
