@@ -22,7 +22,7 @@ public enum MinecraftVersion {
 	private static MinecraftVersion version;
 	private static Boolean hasGsonSupport;
 	private static Boolean isForgePresent;
-	private static boolean bStatsDisabled = false;
+	private static boolean bStatsDisabled = true;
 	private static boolean disablePackageWarning = false;
 	private static boolean updateCheckDisabled = false;
 	/**
