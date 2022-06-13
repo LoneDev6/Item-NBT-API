@@ -24,7 +24,7 @@ public enum MinecraftVersion {
 	private static Boolean isForgePresent;
 	private static boolean bStatsDisabled = true;
 	private static boolean disablePackageWarning = false;
-	private static boolean updateCheckDisabled = false;
+	private static boolean updateCheckDisabled = true;
 	/**
 	 * Logger used by the api
 	 */
