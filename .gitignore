@@ -16,7 +16,7 @@ hs_err_pid*
 *.iml
 
 # Ignore IDEA directory
-.idea/*
+.idea/
 
 # File-based project format:
 *.ipr
@@ -103,3 +103,4 @@ nb-configuration.xml
 ### Git ###
 # Don't exclude the .gitignore itself
 !.gitignore
+.vscode/settings.json

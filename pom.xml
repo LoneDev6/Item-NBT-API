@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.tr7zw</groupId>
   <artifactId>item-nbt-parent</artifactId>
-  <version>2.10.0</version>
+  <version>2.11.1</version>
   <packaging>pom</packaging>
   <inceptionYear>2015</inceptionYear>
   <organization>
@@ -76,7 +76,7 @@
     </pluginRepository>
   </pluginRepositories>
   <build>
-    <defaultGoal>clean install</defaultGoal>
+    <defaultGoal>clean spotless:apply install</defaultGoal>
     <resources>
       <resource>
         <filtering>false</filtering>
@@ -112,7 +112,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.4.0</version>
+        <version>3.4.1</version>
         <configuration>
           <source>8</source>
         </configuration>
@@ -160,6 +160,40 @@
           <licenseFile>LICENSE</licenseFile>
           <force>true</force>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>2.29.0</version>
+        <configuration>
+          <formats>
+            <format>
+              <includes>
+                <include>*.java</include>
+                <include>.gitignore</include>
+              </includes>
+              <trimTrailingWhitespace></trimTrailingWhitespace>
+              <endWithNewline></endWithNewline>
+            </format>
+          </formats>
+          <!-- define a language-specific format -->
+          <java>
+            <!-- no need to specify files, inferred automatically, but you can if you want -->
+
+            <eclipse>
+              <file>formatter.xml</file>
+            </eclipse>
+
+          </java>
+        </configuration>
+        <executions>
+          <execution>
+            <id>spotless</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
