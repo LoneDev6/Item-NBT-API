@@ -24,31 +24,35 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
     private boolean directApply;
     private ItemStack originalSrcStack = null;
 
+    @Deprecated
+    private ItemStack originalItem;
+
     /**
-     * Constructor for NBTItems. The ItemStack will be cloned!
-     * 
-     * @param item
-     */
+    * Constructor for NBTItems. The ItemStack will be cloned!
+    * 
+    * @param item
+    */
     public NBTItem(ItemStack item) {
         this(item, false);
     }
 
     /**
-     * Constructor for NBTItems. The ItemStack will be cloned! If directApply is
-     * true, all changed will be mapped to the original item. Changes to the NBTItem
-     * will overwrite changes done to the original item in that case.
-     * 
-     * @param item
-     * @param directApply
-     */
+    * Constructor for NBTItems. The ItemStack will be cloned! If directApply is true,
+    * all changed will be mapped to the original item. Changes to the NBTItem will overwrite changes done
+    * to the original item in that case.
+    * 
+    * @param item
+    * @param directApply
+    */
     public NBTItem(ItemStack item, boolean directApply) {
         super(null, null);
-        if (item == null || item.getType() == Material.AIR || item.getAmount() <= 0) {
-            throw new NullPointerException("ItemStack can't be null/air/amount of 0! This is not a NBTAPI bug!");
+        if (item == null || item.getType() == Material.AIR) {
+            throw new NullPointerException("ItemStack can't be null/Air! This is not a NBTAPI bug!");
         }
         this.directApply = directApply;
         bukkitItem = item.clone();
-        if (directApply) {
+        this.originalItem = item;
+        if(directApply) {
             this.originalSrcStack = item;
         }
     }
@@ -272,5 +276,11 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
             applyNBT(originalSrcStack);
         }
     }
+
+	@Deprecated
+	public void saveMetaChanges() {
+		this.originalItem.setItemMeta(this.bukkitItem.getItemMeta());
+		this.bukkitItem = this.originalItem.clone();
+	}
 
 }
