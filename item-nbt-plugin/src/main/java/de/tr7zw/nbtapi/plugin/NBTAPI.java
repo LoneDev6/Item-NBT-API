@@ -26,9 +26,11 @@ import de.tr7zw.nbtapi.plugin.tests.compounds.GetterSetterTest;
 import de.tr7zw.nbtapi.plugin.tests.compounds.InterfaceTest;
 import de.tr7zw.nbtapi.plugin.tests.compounds.IteratorTest;
 import de.tr7zw.nbtapi.plugin.tests.compounds.ListTest;
+import de.tr7zw.nbtapi.plugin.tests.compounds.LongArrayTest;
 import de.tr7zw.nbtapi.plugin.tests.compounds.MergeTest;
 import de.tr7zw.nbtapi.plugin.tests.compounds.ModernSubCompoundsTest;
 import de.tr7zw.nbtapi.plugin.tests.compounds.RemovingKeys;
+import de.tr7zw.nbtapi.plugin.tests.compounds.ResolveTest;
 import de.tr7zw.nbtapi.plugin.tests.compounds.StreamTest;
 import de.tr7zw.nbtapi.plugin.tests.compounds.SubCompoundsTest;
 import de.tr7zw.nbtapi.plugin.tests.compounds.TypeTest;
@@ -48,6 +50,11 @@ import de.tr7zw.nbtapi.plugin.tests.tiles.TilesCustomNBTPersistentTest;
 import de.tr7zw.nbtinjector.NBTInjector;
 import de.tr7zw.nbtapi.plugin.tests.items.ItemMergingTest;
 import de.tr7zw.nbtapi.plugin.tests.items.ItemStackConversionTest;
+import de.tr7zw.nbtapi.plugin.tests.proxy.DataItemProxyTest;
+import de.tr7zw.nbtapi.plugin.tests.proxy.SimpleProxyTest;
+import de.tr7zw.nbtapi.plugin.tests.items.MetaTest;
+import de.tr7zw.nbtapi.plugin.tests.items.NBTModifyItemTest;
+import de.tr7zw.nbtapi.plugin.tests.items.SmuggleTest;
 
 public class NBTAPI extends JavaPlugin {
 
@@ -101,6 +108,7 @@ public class NBTAPI extends JavaPlugin {
         apiTests.add(new RemovingKeys());
         apiTests.add(new EnumTest());
         apiTests.add(new InterfaceTest());
+        apiTests.add(new ResolveTest());
         if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_8_R3)) // 1.7.10 list support is not complete at all
             apiTests.add(new ListTest());
         apiTests.add(new SubCompoundsTest());
@@ -112,6 +120,8 @@ public class NBTAPI extends JavaPlugin {
         apiTests.add(new EqualsTest());
         if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_8_R3)) // 1.7.10 list support is not complete at all
             apiTests.add(new IteratorTest());
+        if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_16_R1))
+            apiTests.add(new LongArrayTest());
 
         // Items
         if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_8_R3)) { // 1.7.10 not a thing
@@ -119,11 +129,17 @@ public class NBTAPI extends JavaPlugin {
             apiTests.add(new ItemStackConversionTest());
         }
         apiTests.add(new EmptyItemTest());
+        apiTests.add(new SmuggleTest());
+        apiTests.add(new DataItemProxyTest());
+        apiTests.add(new MetaTest());
         if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_8_R3)) { // 1.7.10 not a thing
             apiTests.add(new ItemMergingTest());
             apiTests.add(new DirectApplyTest());
             apiTests.add(new DirectApplyMetaTest());
+            apiTests.add(new NBTModifyItemTest());
         }
+        // Proxies
+        apiTests.add(new SimpleProxyTest());
 
         // Entity
         apiTests.add(new EntityTest());
@@ -167,8 +183,7 @@ public class NBTAPI extends JavaPlugin {
         }
         getLogger().info("Adding listeners...");
         Bukkit.getPluginManager().registerEvents(new ReloadListener(), this);
-        getLogger().info("Gson:");
-        MinecraftVersion.hasGsonSupport();
+        MinecraftVersion.hasGsonSupport(); // init gson(if it hasn't already)
         getLogger().info("Checking bindings...");
         MinecraftVersion.getVersion();
 

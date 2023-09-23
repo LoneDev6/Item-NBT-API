@@ -18,7 +18,7 @@ public class NBTFile extends NBTCompound {
     private Object nbt;
 
     /**
-     * Creates a NBTFile that uses @param file to store it's data. If this file
+     * Creates a NBTFile that uses @param file to store its data. If this file
      * exists, the data will be loaded.
      * 
      * @param file
@@ -99,7 +99,7 @@ public class NBTFile extends NBTCompound {
             if (!file.createNewFile())
                 throw new IOException("Unable to create file at " + file.getAbsolutePath());
         }
-        NBTReflectionUtil.writeNBT(nbt.getCompound(), Files.newOutputStream(file.toPath()));
+        nbt.writeCompound(Files.newOutputStream(file.toPath()));
     }
 
 }

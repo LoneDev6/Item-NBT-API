@@ -16,6 +16,8 @@ import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
 public class NBTContainer extends NBTCompound {
 
     private Object nbt;
+    private boolean closed;
+    private boolean readOnly;
 
     /**
      * Creates an empty, standalone NBTCompound
@@ -33,7 +35,7 @@ public class NBTContainer extends NBTCompound {
     public NBTContainer(Object nbt) {
         super(null, null);
         if (nbt == null) {
-            throw new NullPointerException("The NBT-Object can't be null!");
+            nbt = ObjectCreator.NMS_NBTTAGCOMPOUND.getInstance();
         }
         if (!ClassWrapper.NMS_NBTTAGCOMPOUND.getClazz().isAssignableFrom(nbt.getClass())) {
             throw new NbtApiException("The object '" + nbt.getClass() + "' is not a valid NBT-Object!");
@@ -77,6 +79,25 @@ public class NBTContainer extends NBTCompound {
     @Override
     public void setCompound(Object tag) {
         nbt = tag;
+    }
+
+    @Override
+    protected void setClosed() {
+        this.closed = true;
+    }
+
+    @Override
+    protected boolean isClosed() {
+        return closed;
+    }
+    
+    protected boolean isReadOnly() {
+        return readOnly;
+    }
+
+    protected NBTContainer setReadOnly(boolean readOnly) {
+        this.readOnly = true;
+        return this;
     }
 
 }

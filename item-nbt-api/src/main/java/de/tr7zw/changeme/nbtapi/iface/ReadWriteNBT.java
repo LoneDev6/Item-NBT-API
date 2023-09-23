@@ -2,6 +2,8 @@ package de.tr7zw.changeme.nbtapi.iface;
 
 import java.util.UUID;
 
+import javax.annotation.Nullable;
+
 import org.bukkit.inventory.ItemStack;
 
 public interface ReadWriteNBT extends ReadableNBT {
@@ -89,6 +91,16 @@ public interface ReadWriteNBT extends ReadableNBT {
     /**
      * Setter
      * 
+     * Requires 1.16+
+     * 
+     * @param key
+     * @param value
+     */
+    void setLongArray(String key, long[] value);
+
+    /**
+     * Setter
+     * 
      * @param key
      * @param value
      */
@@ -135,7 +147,28 @@ public interface ReadWriteNBT extends ReadableNBT {
      * @param name
      * @return The Compound instance or null
      */
+    @Nullable
     ReadWriteNBT getCompound(String name);
+
+    /**
+     * Returns the resolved and creates compounds as required.
+     * <p>
+     * 
+     * @param key Path key, seperated by '.'. For example: "foo.bar.baz". Dots can
+     *            be escaped with a backslash.
+     * @return The resolved compound.
+     */
+    ReadWriteNBT resolveOrCreateCompound(String key);
+
+    /**
+     * Set an Object to a key via the provided handler.
+     * 
+     * @param <T>
+     * @param key
+     * @param value
+     * @param handler
+     */
+    <T> void set(String key, T value, NBTHandler<T> handler);
 
     /**
      * Set a key to the given Enum value. It gets stored as a String. Passing null

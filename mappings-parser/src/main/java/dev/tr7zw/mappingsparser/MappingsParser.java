@@ -24,7 +24,7 @@ public class MappingsParser {
     public static StringBuilder builder = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
-        File input = new File("minecraft_server.1.20.txt");
+        File input = new File("minecraft_server.1.20.2.txt");
         List<String> lines = Files.readAllLines(input.toPath());
 
         Map<String, ClassWrapper> classes = new HashMap<>();
@@ -40,6 +40,9 @@ public class MappingsParser {
         ClassWrapper nmsWrapper = null;
         Map<ReflectionMethod, String> mappedNames = null;
         for (String line : lines) {
+            if (line.startsWith("#")) {
+                continue;
+            }
             if (!line.startsWith(" ")) {
                 if (nmsWrapper != null && mappedNames != null) {
                     proccessMapping(nmsWrapper, mappedNames);
@@ -59,13 +62,15 @@ public class MappingsParser {
             mojangName = line.trim().split(" ")[1];
             unmappedName = line.trim().split(" ")[3];
             classes.remove(currentClass);
-            for (ReflectionMethod method : mappedNames.keySet()) {
-                if (method.getSelectedVersionInfo() == null)
-                    continue;
-                if (!mojangName.contains("("))
-                    continue;
-                if (mojangName.equals(method.getSelectedVersionInfo().name)) {
-                    mappedNames.put(method, unmappedName);
+            if (mappedNames != null) {
+                for (ReflectionMethod method : mappedNames.keySet()) {
+                    if (method.getSelectedVersionInfo() == null)
+                        continue;
+                    if (!mojangName.contains("("))
+                        continue;
+                    if (mojangName.equals(method.getSelectedVersionInfo().name)) {
+                        mappedNames.put(method, unmappedName);
+                    }
                 }
             }
             // System.out.println(currentClass + ": " + mojangName + " -> " + unmappedName);

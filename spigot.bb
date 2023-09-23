@@ -1,5 +1,5 @@
 [B][SIZE=6](Item/Entity/Tile) NBT API[/SIZE][/B]
-[URL='https://ci.codemc.io/job/Tr7zw/job/Item-NBT-API/'][IMG]https://ci.codemc.org/buildStatus/icon?job=Tr7zw%2FItem-NBT-API[/IMG][/URL]  [URL='https://sonarcloud.io/dashboard?id=de.tr7zw%3Aitem-nbt-parent'][IMG]https://sonarcloud.io/api/project_badges/measure?project=de.tr7zw%3Aitem-nbt-parent&metric=ncloc[/IMG][/URL] [URL='https://bstats.org/plugin/bukkit/ItemNBTAPI'][IMG]https://img.shields.io/bstats/servers/1058.svg?color=green&label=OnlineServers&style=plastic[/IMG][/URL] [URL='https://bstats.org/plugin/bukkit/ItemNBTAPI'][IMG]https://img.shields.io/bstats/players/1058.svg?color=green&label=OnlinePlayers&style=plastic[/IMG] [/URL][URL='https://discordapp.com/invite/yk4caxM'][IMG]https://img.shields.io/discord/342814924310970398?color=%237289DA&label=Discord&logo=discord&logoColor=white[/IMG][/URL]
+[URL='https://ci.codemc.io/job/Tr7zw/job/Item-NBT-API/'][IMG]https://ci.codemc.org/buildStatus/icon?job=Tr7zw%2FItem-NBT-API[/IMG][/URL]  [URL='https://sonarcloud.io/dashboard?id=tr7zw_Item-NBT-API'][IMG]https://sonarcloud.io/api/project_badges/measure?project=tr7zw_Item-NBT-API&metric=ncloc[/IMG][/URL] [URL='https://bstats.org/plugin/bukkit/ItemNBTAPI'][IMG]https://img.shields.io/bstats/servers/1058.svg?color=green&label=OnlineServers&style=plastic[/IMG][/URL] [URL='https://bstats.org/plugin/bukkit/ItemNBTAPI'][IMG]https://img.shields.io/bstats/players/1058.svg?color=green&label=OnlinePlayers&style=plastic[/IMG] [/URL][URL='https://discordapp.com/invite/yk4caxM'][IMG]https://img.shields.io/discord/342814924310970398?color=%237289DA&label=Discord&logo=discord&logoColor=white[/IMG][/URL]
 The NBT API allows you to add custom NBT tags to Itemstacks, TileEntities and Entities, or modify excisting ones!
 It completely uses reflections to interact with NMS code and works with all the latest versions. On server start the plugin checks all reflections.
 
@@ -112,7 +112,7 @@ Just use the Plugin as Maven dependency and remember to add "NBTAPI" as dependen
 <dependency>
   <groupId>de.tr7zw</groupId>
   <artifactId>item-nbt-api-plugin</artifactId>
-  <version>2.11.3</version>
+  <version>2.12.0</version>
 </dependency>
 [/CODE]
 [/SPOILER]
@@ -122,7 +122,7 @@ Using this method the API gets copied into your plugin. Server owners don't have
 <dependency>
   <groupId>de.tr7zw</groupId>
   <artifactId>item-nbt-api</artifactId>
-  <version>2.11.3</version>
+  <version>2.12.0</version>
 </dependency>
 ...
     <plugins>
