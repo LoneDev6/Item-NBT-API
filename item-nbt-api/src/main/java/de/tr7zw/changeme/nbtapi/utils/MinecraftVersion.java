@@ -27,8 +27,8 @@ public enum MinecraftVersion {
     private static Boolean hasGsonSupport;
     private static Boolean isForgePresent;
     private static Boolean isFoliaPresent;
-    private static boolean bStatsDisabled = false;
-    private static boolean disablePackageWarning = false;
+    private static boolean bStatsDisabled = true;
+    private static boolean disablePackageWarning = true;
     private static boolean updateCheckDisabled = true;
     /**
      * Logger used by the api
