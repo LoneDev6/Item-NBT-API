@@ -40,7 +40,7 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
     * @param item
     */
     public NBTItem(ItemStack item) {
-        this(item, false);
+        this(item, true);
     }
     
     /**
